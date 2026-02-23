@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang=en>
+   <head>
+      <meta charset=utf-8>
+      <meta name=viewport                              content="width=device-width, initial-scale=1">
+      <meta name=robots                                content="index, follow">
+      <meta name=description                           content="A single HTML file for showing a reveal.js presentation locally">
+      <meta name=apple-mobile-web-app-title            content="Presentation">
+      <meta name=apple-mobile-web-app-capable          content=yes>
+      <meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+      <title>[See H1 tag in first slide]</title>
+      <link rel=icon       href=https://center-key.github.io/reveal.js-local/assets/bookmark-icon.png>
+      <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2/css/all.min.css>
+      <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/dna-engine@3.3/dist/dna-engine.css>
+      <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/dna-engine@3.3/dist/panel-nav.css>
+      <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/reveal.js@5.2/dist/reveal.css>
+      <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/hljs-enhance@2.1/dist/hljs-enhance.css>
+      <link rel=stylesheet href=https://cdn.jsdelivr.net/gh/center-key/reveal.js-local@1.0/dist/reveal.js-local.css>
+      <script defer src=https://cdn.jsdelivr.net/npm/reveal.js@5.2/dist/reveal.js></script>
+      <script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11/build/highlight.min.js></script>
+      <script defer src=https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11/build/languages/http.min.js></script>
+      <script defer src=https://cdn.jsdelivr.net/npm/dna-engine@3.3/dist/dna-engine.min.js></script>
+      <script defer src=https://cdn.jsdelivr.net/npm/hljs-enhance@2.1/dist/hljs-enhance.js></script>
+      <script defer src=https://cdn.jsdelivr.net/gh/center-key/reveal.js-local@1.0/dist/reveal.js-local.js></script>
+      <script src=https://cdn.jsdelivr.net/npm/chart.js@4.5/dist/chart.umd.js></script>  <!-- wait for loading -->
+      <script src=https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2/dist/chartjs-plugin-datalabels.min.js></script>  <!-- wait for loading -->
+      <script src=https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1/dist/chartjs-plugin-annotation.min.js></script>  <!-- wait for loading -->
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!--  reveal.js-local v1.0.1                                                                   -->
+<!--  ======================                                                                   -->
+<!--  A single HTML file for showing a reveal.js presentation locally.                         -->
+<!--                                                                                           -->
+<!--  View sample "presentation-template.html" online at:                                      -->
+<!--     https://center-key.github.io/reveal.js-local                                          -->
+<!--                                                                                           -->
+<!--  Project:                                                                                 -->
+<!--     https://github.com/center-key/reveal.js-local                                         -->
+<!--                                                                                           -->
+<!--  This project uses reveal.js by Hakim El Hattab, see:                                     -->
+<!--     https://github.com/hakimel/reveal.js                                                  -->
+<!--                                                                                           -->
+<!--  Extras:                                                                                  -->
+<!--     * References a CDN copy of reveal.js so the presentation doesn't start off over 1 MB  -->
+<!--     * Adds some sample slides to show formatting                                          -->
+<!--     * Toggles hidden slides by pressing the backtick (`) key                              -->
+<!--     * Includes hover effects for tables and source code to help speaker point to items    -->
+<!--     * Trims code whitespace to render properly even when aligned with surrounding HTML    -->
+<!--                                                                                           -->
+<!--  To get started:                                                                          -->
+<!--     Save "dist/presentation-template.html" locally and then view and edit it locally.     -->
+<!--                                                                                           -->
+<!--  MIT License                                                                              -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<!-- Presentation Settings -->
+<script id=presentation-settings>
+   const themes =              { 1: 'black', 2: 'blood', 3: 'dracula', 4: 'league', 5: 'night', 6: 'simple', 7: 'sky', 8: 'solarized', 9: 'white' };
+   const selectedTheme =       1;  //set to desired image from above list, see: https://revealjs.com/themes
+   const baseFontSizePercent = 70;
+   const backgroundTypeToUse = { color: true, gradient: false, image: false };  //set just one type of background to true
+   const backgroundColor =     'dkgray';
+   const backgroundGradient =  'linear-gradient(to right, darkslategray, teal 15%, teal 85%, darkslategray)';
+   const backgroundImages = {
+      1: 'https://cdn.discordapp.com/attachments/1053565371623424090/1369070068239040613/image_2.png?ex=699cccdc&is=699b7b5c&hm=17ad23213625045b7257239baa26f57a6bbc130c006c28e8dc9a3490f5c48027',
+      2: 'https://center-key.github.io/reveal.js-local/assets/nasa-pluto-dark.jpg',
+      3: 'https://center-key.github.io/reveal.js-local/assets/nasa-reflection-nebula.jpg',
+      4: 'https://center-key.github.io/reveal.js-local/assets/nasa-space-nebula.jpg',
+      5: 'https://center-key.github.io/reveal.js-local/assets/nasa-wise-orion.jpg',
+      6: 'https://center-key.github.io/reveal.js-local/assets/nasa-wise-red-galaxy.jpg',
+      7: 'https://center-key.github.io/reveal.js-local/assets/nps-denali-by-tim-rains.jpg',
+      8: 'assets/my-image.jpg',  //add custom background image to local "assets" folder
+      };
+   const selectedBackgroundImage = 1;  //set to desired image from above list
+   const syntaxHighlightingTheme = 'Atom One Dark';  //see list of themes at: https://highlightjs.org/static/demo
+   const autoAdvance =             false;
+   const autoAdvanceSeconds =      10;
+   Chart.register(ChartDataLabels);
+   Chart.register(globalThis['chartjs-plugin-annotation']);
+   Chart.defaults.font.size =                  20;
+   Chart.defaults.color =                      'black';
+   Chart.defaults.plugins.datalabels.display = false;
+</script>
+
+<!-- Custom JavaScript -->
+<script id=presentation-custom-setup>
+   const presentationCustomSetup = () => {
+      console.info('Presentation is ready.');
+      ///////////////////////////
+      // Put custom code here. //
+      ///////////////////////////
+      };
+</script>
+
+<!-- Custom Style -->
+<style id=presentation-custom-css >
+   /****************************/
+   /* Put custom styling here. */
+   /****************************/
+</style>
+
+</head><body><div class=reveal><div class=slides>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- Start of Slides                                                                             -->
+<!-- Note: Each <section> tag represents a slide of the presentation.                            -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<section data-background-image="https://cdn.discordapp.com/attachments/1053565371623424090/1369070068239040613/image_2.png?ex=699cccdc&is=699b7b5c&hm=17ad23213625045b7257239baa26f57a6bbc130c006c28e8dc9a3490f5c48027">
+   <h1 id=presentation-title style="transform: translateY(3em);">Projeto de vida</h1>
+</section>
+
+<section>
+    <section>
+        <h1>Objetivos de curto prazo</h1>
+    </section>
+    <section data-background-image="https://cdn.discordapp.com/attachments/1053565371623424090/1369069378548662312/image_2.png?ex=699ccc37&is=699b7ab7&hm=30e070ed68bc9303f649ed96bbb8908b92dfba7168edf926fe56eacce2a28450">
+    </section>
+    <section data-background-image="assets/street_pizza.jpg">
+    </section>
+    <section>
+        <h1>GMLS</h1>
+        <img src="https://cdn.discordapp.com/attachments/872977868756492290/1475317542632427792/image.png?ex=699d0c08&is=699bba88&hm=e76c060335995e8489ee4d99dd06426d22c7f5642b0489ab6d2e9e8032458bfe">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.CYhd0CH06qjBPrEeEC1YrgAAAA%3Fpid%3DApi&f=1&ipt=0988e718561c45c908045840c671e613af2e8362e63a4fa0f483ef3ac37ba8b2">
+    </section>
+</section>
+
+<section>
+    <section>
+        <h1>Objetivos de medio prazo</h1>
+    </section>
+    <section>
+        <h1>Client de chat agnóstico</h1>
+        <div>
+            <img src="assets/discord.jpeg">
+            <img src="assets/matrix.png">
+            <img src="assets/zap.png">
+        </div>
+    </section>
+    <section>
+        <h1>Git hosting com tasks no source code</h1>
+        <div>
+            <img src="assets/github.png">
+            <img src="assets/codeberg.png">
+            <img src="assets/gitlab.png">
+        </div>
+    </section>
+    <section>
+        <h1>Weirduck Game Engine</h1>
+    </section>
+</section>
+
+<section>
+    <section>
+        <h1>Objetivos de longo prazo</h1>
+    </section>
+    <section data-background-image="assets/minecraft.jpeg">
+    </section>
+    <section data-background-image="assets/w3c.png">
+    </section>
+    <section data-background-image="assets/major-os.png">
+    </section>
+</section>
+
+<section>
+    <h1>Conclusão</h1>
+</section>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!-- End of Slides                                                                               -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+</div></div></body></html>
